@@ -38,4 +38,10 @@ public class IPokemonMetadataProviderTest {
     public void PokedexExceptionTest() throws PokedexException {
         assertThrows(PokedexException.class, () -> myDataProvider.getPokemonMetadata(126));
     }
+
+    @Test
+    public void getPokemonMetadataTest() throws PokedexException {
+        assertEquals(myDataProvider.getPokemonMetadata(0), bulbizarreMetadata);
+        assertEquals(myDataProvider.getPokemonMetadata(133), aqualiMetadata);
+    }
 }

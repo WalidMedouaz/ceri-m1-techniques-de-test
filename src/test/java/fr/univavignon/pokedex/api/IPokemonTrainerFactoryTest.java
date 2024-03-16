@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 public class IPokemonTrainerFactoryTest {
 
     IPokemonTrainerFactory myTrainerFactory;
-    IPokedex myPokedex;
     IPokedexFactory myPokedexFactory;
     PokemonTrainer myPokemonTrainer;
     String name;
@@ -16,7 +15,6 @@ public class IPokemonTrainerFactoryTest {
     @Before
     public void initTestEnvironment() {
         myTrainerFactory = new PokemonTrainerFactory();
-        myPokedex = new Pokedex(new PokemonFactory(), new PokemonMetadataProvider());
         myPokedexFactory = new PokedexFactory();
 
         team = Team.MYSTIC;
@@ -38,6 +36,11 @@ public class IPokemonTrainerFactoryTest {
     @Test
     public void getTeam() {
         assertEquals(myTrainerFactory.createTrainer(name, team, myPokedexFactory).getTeam(), myPokemonTrainer.getTeam());
+    }
+
+    @Test
+    public void getPokedex() {
+        assertNotNull(myPokemonTrainer.getPokedex());
     }
 
 }

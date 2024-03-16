@@ -52,6 +52,9 @@ public class IPokemonMetadataProviderTest {
     @Test
     public void throwPokedexException() {
         assertThrows(PokedexException.class, () -> {
+            myDataProvider.getPokemonMetadata(-1);
+        });
+        assertThrows(PokedexException.class, () -> {
             myDataProvider.getPokemonMetadata(172);
         });
     }

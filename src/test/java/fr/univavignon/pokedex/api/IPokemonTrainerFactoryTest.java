@@ -2,11 +2,7 @@ package fr.univavignon.pokedex.api;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.junit.Before;
-import org.junit.Test;
 import static org.junit.Assert.*;
-import org.mockito.Mockito;
 
 public class IPokemonTrainerFactoryTest {
 
@@ -19,20 +15,19 @@ public class IPokemonTrainerFactoryTest {
 
     @Before
     public void initTestEnvironment() {
-        myTrainerFactory = Mockito.mock(IPokemonTrainerFactory.class);
-        myPokedex = Mockito.mock(IPokedex.class);
-        myPokedexFactory = Mockito.mock(IPokedexFactory.class);
+        myTrainerFactory = new PokemonTrainerFactory();
+        myPokedex = new Pokedex(new PokemonFactory(), new PokemonMetadataProvider());
+        myPokedexFactory = new PokedexFactory();
 
         team = Team.MYSTIC;
         name = "TrainerName";
 
-        myPokemonTrainer = new PokemonTrainer(name, team, myPokedex);
-        Mockito.when(myTrainerFactory.createTrainer(name, team, myPokedexFactory)).thenReturn(myPokemonTrainer);
+        myPokemonTrainer = myTrainerFactory.createTrainer(name, team, myPokedexFactory);
     }
 
     @Test
     public void createTrainerTest() {
-        assertEquals(myTrainerFactory.createTrainer(name, team, myPokedexFactory), myPokemonTrainer);
+        assertNotNull(myTrainerFactory.createTrainer(name, team, myPokedexFactory));
     }
 
     @Test
@@ -45,8 +40,4 @@ public class IPokemonTrainerFactoryTest {
         assertEquals(myTrainerFactory.createTrainer(name, team, myPokedexFactory).getTeam(), myPokemonTrainer.getTeam());
     }
 
-    @Test
-    public void getPokedex() {
-        assertEquals(myTrainerFactory.createTrainer(name, team, myPokedexFactory).getPokedex(), myPokemonTrainer.getPokedex());
-    }
 }

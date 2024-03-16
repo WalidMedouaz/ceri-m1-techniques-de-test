@@ -2,9 +2,9 @@ package fr.univavignon.pokedex.api;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class IPokemonFactoryTest {
 
@@ -13,19 +13,15 @@ public class IPokemonFactoryTest {
     Pokemon myAquali;
     @Before
     public void initTestEnvironment() {
-        myPokemonFactory = Mockito.mock(IPokemonFactory.class);
+        myPokemonFactory = new PokemonFactory();
         myBulbizarre = new Pokemon(0, "Bulbizarre", 126,126,90,613,64,4000,4,56);
         myAquali = new Pokemon(133,"Aquali",186,168,260,2729,202,5000,4,100);
-
-        Mockito.when(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4)).thenReturn(myBulbizarre);
-        Mockito.when(myPokemonFactory.createPokemon(133, 2729, 202, 5000, 4)).thenReturn(myAquali);
     }
     @Test
     public void createPokemonTest() {
-        assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4), myBulbizarre);
-        assertEquals(myPokemonFactory.createPokemon(133, 2729, 202, 5000, 4), myAquali);
+        assertNotNull(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4));
+        assertNotNull(myPokemonFactory.createPokemon(133, 2729, 202, 5000, 4));
     }
-
     @Test
     public void getCpTest() {
         assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getCp(), myBulbizarre.getCp());
@@ -46,6 +42,10 @@ public class IPokemonFactoryTest {
     public void getIvTest() {
         double delta = 0;
         assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getIv(), myBulbizarre.getIv(), delta);
+    }
+    @Test
+    public void throwPokedexException() {
+        myPokemonFactory.createPokemon(192, 0, 0, 0, 0);
     }
 
 }

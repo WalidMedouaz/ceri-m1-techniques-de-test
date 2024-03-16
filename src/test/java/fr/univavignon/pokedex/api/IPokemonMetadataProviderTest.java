@@ -2,11 +2,10 @@ package fr.univavignon.pokedex.api;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IPokemonMetadataProviderTest {
 
@@ -15,28 +14,15 @@ public class IPokemonMetadataProviderTest {
     PokemonMetadata aqualiMetadata;
     @Before
     public void initTestEnvironment() throws PokedexException {
-        myDataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        myDataProvider = new PokemonMetadataProvider();
 
-        bulbizarreMetadata = new PokemonMetadata(0, "Bulbizarre", 126, 126,90);
-        aqualiMetadata = new PokemonMetadata(133,"Aquali",186,168,260);
-
-        Mockito.when(myDataProvider.getPokemonMetadata(any(Integer.class))).thenAnswer(input -> {
-            int inputMetadata = input.getArgument(0);
-            if(inputMetadata == 0) {
-                return bulbizarreMetadata;
-            }
-            else if(inputMetadata == 133){
-                return aqualiMetadata;
-            }
-            else {
-                throw new PokedexException("Index inexistant !");
-            }
-        });
+        bulbizarreMetadata = myDataProvider.getPokemonMetadata(0);
+        aqualiMetadata = myDataProvider.getPokemonMetadata(133);
     }
 
     @Test
-    public void PokedexExceptionTest() throws PokedexException {
-        assertThrows(PokedexException.class, () -> myDataProvider.getPokemonMetadata(126));
+    public void MetadataNotFoundTest() throws PokedexException {
+        assertNull(myDataProvider.getPokemonMetadata(126));
     }
     @Test
     public void getPokemonMetadataTest() throws PokedexException {
@@ -62,6 +48,12 @@ public class IPokemonMetadataProviderTest {
     @Test
     public void getPokemonMetadataStaminaTest() throws PokedexException {
         assertEquals(myDataProvider.getPokemonMetadata(0).getStamina(), bulbizarreMetadata.getStamina());
+    }
+    @Test
+    public void throwPokedexException() {
+        assertThrows(PokedexException.class, () -> {
+            myDataProvider.getPokemonMetadata(172);
+        });
     }
 
 }

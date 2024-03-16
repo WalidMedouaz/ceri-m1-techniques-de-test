@@ -38,10 +38,30 @@ public class IPokemonMetadataProviderTest {
     public void PokedexExceptionTest() throws PokedexException {
         assertThrows(PokedexException.class, () -> myDataProvider.getPokemonMetadata(126));
     }
-
     @Test
     public void getPokemonMetadataTest() throws PokedexException {
         assertEquals(myDataProvider.getPokemonMetadata(0), bulbizarreMetadata);
         assertEquals(myDataProvider.getPokemonMetadata(133), aqualiMetadata);
     }
+    @Test
+    public void getPokemonMetadataIndexTest() throws PokedexException {
+        assertEquals(myDataProvider.getPokemonMetadata(0).getIndex(), bulbizarreMetadata.getIndex());
+    }
+    @Test
+    public void getPokemonMetadataNameTest() throws PokedexException {
+        assertEquals(myDataProvider.getPokemonMetadata(0).getName(), bulbizarreMetadata.getName());
+    }
+    @Test
+    public void getPokemonMetadataAttackTest() throws PokedexException {
+        assertEquals(myDataProvider.getPokemonMetadata(0).getAttack(), bulbizarreMetadata.getAttack());
+    }
+    @Test
+    public void getPokemonMetadataDefenseTest() throws PokedexException {
+        assertEquals(myDataProvider.getPokemonMetadata(0).getDefense(), bulbizarreMetadata.getDefense());
+    }
+    @Test
+    public void getPokemonMetadataStaminaTest() throws PokedexException {
+        assertEquals(myDataProvider.getPokemonMetadata(0).getStamina(), bulbizarreMetadata.getStamina());
+    }
+
 }

@@ -26,4 +26,26 @@ public class IPokemonFactoryTest {
         assertEquals(myPokemonFactory.createPokemon(133, 2729, 202, 5000, 4), myAquali);
     }
 
+    @Test
+    public void getCpTest() {
+        assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getCp(), myBulbizarre.getCp());
+    }
+    @Test
+    public void getHpTest() {
+        assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getHp(), myBulbizarre.getHp());
+    }
+    @Test
+    public void getDustTest() {
+        assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getDust(), myBulbizarre.getDust());
+    }
+    @Test
+    public void getCandyTest() {
+        assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getCandy(), myBulbizarre.getCandy());
+    }
+    @Test
+    public void getIvTest() {
+        double delta = 0;
+        assertEquals(myPokemonFactory.createPokemon(0, 613, 64, 4000, 4).getIv(), myBulbizarre.getIv(), delta);
+    }
+
 }

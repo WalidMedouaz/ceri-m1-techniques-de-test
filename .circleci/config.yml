@@ -27,7 +27,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: docs/
+          at: target/site
       - run:
           name: Install and configure dependencies
           command: |
@@ -36,7 +36,7 @@ jobs:
             git config user.name "WalidMedouaz"
       - run:
           name: Deploy docs to gh-pages branch
-          command: gh-pages --dist docs/apidocs/
+          command: gh-pages --dist target/site/apidocs
 
 
 workflows:

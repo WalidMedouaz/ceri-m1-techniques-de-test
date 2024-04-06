@@ -17,6 +17,12 @@ jobs:
       - run:
           name: Upload Codecov
           command: bash <(curl -s https://codecov.io/bash)
+      - run:
+          name: Generate Checkstyle
+          command: mvn site
+      - run:
+          name: Generate Badge
+          command: mvn post-site
 
 
 workflows:

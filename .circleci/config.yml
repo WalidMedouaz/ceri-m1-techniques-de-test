@@ -20,9 +20,6 @@ jobs:
       - run:
           name: Generate Checkstyle
           command: mvn site
-      - run:
-          name: Generate Badge
-          command: mvn post-site
 
 
 workflows:

@@ -10,3 +10,5 @@
 [![codecov](https://codecov.io/gh/WalidMedouaz/ceri-m1-techniques-de-test/graph/badge.svg?token=NBBDMNA840)](https://codecov.io/gh/WalidMedouaz/ceri-m1-techniques-de-test)
 
 ![Checkstyle](target/site/badges/checkstyle-result.svg)
+
+[![JavaDoc](http://www.javadoc.io/badge/org.redisson/redisson.svg)](https://walidmedouaz.github.io/ceri-m1-techniques-de-test/fr/univavignon/pokedex/api/package-summary.html)
